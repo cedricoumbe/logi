@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
+    <meta charset="ISO-8859-1">
+<!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Sous Agents</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+     <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+          <link th:href="@{/assets/vendors/simple-datatables/style.css}" rel="stylesheet" />
+                 <link th:href="@{/assets/vendors/sweetalert2/sweetalert2.min.css}" rel="stylesheet" />
+          
+     
+  <link th:href="@{/assets/vendors/iconly/bold.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
+  <link th:href="@{/assets/css/app.css}" rel="stylesheet" />
+  <link th:href="@{/assets/images/favicon.html}" rel="image/x-icon" />
+</head>
+
+<body>
+    <div id="app">
+          <div  th:replace="fragments/header :: header"> </div>    
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Sous Agent</h3>
+                            <p class="text-subtitle text-muted"></p>
+                        </div>
+                        
+                    </div>
+                </div>
+                 <section class="section">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                               
+                                <div class="card-body">
+                            
+                                    <div class="buttons">
+                                       
+                                            <a  th:href="@{/create_sous_agent}" class="btn btn-outline-primary" href="#">
+                                            Nouveau</a>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                 </section>
+                 <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                          Liste des Sous agents
+                        </div>
+                       
+                          
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Nom du sous agent</th>
+                                        <th>Reseau de Transfert</th>
+                                         <th>Nom Commercial</th>
+                                         <th>Nom Operateur</th>
+                                         <th>Adresse</th>
+                                        <th>Date de Creation</th>
+                                        <th>Date de Modification</th>
+                                        <th>Action</th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="list_des_sous_agent: ${list_des_sous_agents}">
+                                    <td th:text="${list_des_sous_agent.sous_agent_nom}"></td>
+                                   <td>
+                                     <th:block th:each="sous_agent_reseau : ${list_des_sous_agent.reseautransferts}">
+                                          <span th:text="${sous_agent_reseau.getReseautransfertnom} + ' '"></span></br>
+                                               </th:block>
+
+                                      </td>
+                                    <td th:text="${list_des_sous_agent.sous_agent_nom_commercial}"></td>
+                                     <td th:text="${list_des_sous_agent.sous_agent_nom_commercial}"></td>
+                                    <td th:text="${list_des_sous_agent.sous_agent_nom_operateur}"></td>
+                                    <td th:text="${list_des_sous_agent.sous_agent_date_cre}"></td>
+                                    <td th:text="${list_des_sous_agent.sous_agent_date_mod}"></td>
+                                      
+                                    <td>
+                                        <a th:href="@{/update_sous_agent/{id}(id=${list_des_sous_agent.sous_agent_id})}" class="btn btn-primary">Modifier</a>
+                                        <a th:href="@{/delete_sous_agent/{id}(id=${list_des_sous_agent.sous_agent_id})}" class="btn btn-danger">Supprimer</a>
+                                    </td>
+                              </tr>
+                                
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+            
+            </div>
+     <div  th:replace="fragments/footer :: footer"> </div>    
+           
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+      <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+       <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+    
+    <script src="assets/js/extensions/sweetalert2.js"></script>
+    <script src="assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+
+<!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:38 GMT -->
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
+
+
+<!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Reseaux de Transfert</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+     <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+          <link th:href="@{/assets/vendors/simple-datatables/style.css}" rel="stylesheet" />
+                 <link th:href="@{/assets/vendors/sweetalert2/sweetalert2.min.css}" rel="stylesheet" />
+          
+     
+  <link th:href="@{/assets/vendors/iconly/bold.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
+  <link th:href="@{/assets/css/app.css}" rel="stylesheet" />
+  <link th:href="@{/assets/images/favicon.html}" rel="image/x-icon" />
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">LOGI-REPORT</li>
+
+                        <li class="sidebar-item active ">
+                            <a href="index.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>OPERATIONS</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="component-alert.html">Operations Journalières</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-badge.html">Enregistrer</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-breadcrumb.html">Importer Fichier Excel</a>
+                                </li>
+                              
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Operateur</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Reseaux de transfert</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>CAISSE</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="component-alert.html">Ouverture de caisse</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-badge.html">Fermeture de caisse</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-breadcrumb.html">Clôture de la journée</a>
+                                </li>
+                              
+                            </ul>
+                        </li>
+                          <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>EMPLOYE</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="component-alert.html">Rôle</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-badge.html">Utilisateur</a>
+                                </li>
+                               
+                              
+                            </ul>
+                        </li>
+                         <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>SOUS AGENT</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="component-alert.html">Operateur</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-badge.html">Contrat</a>
+                                </li>
+                               
+                              
+                            </ul>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Reseaux de transfert</span>
+                            </a>
+                        </li>
+                          <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Opérations</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Commissions</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Compenses</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Reporting</span>
+                            </a>
+                        </li>
+                       
+
+                       
+
+                     
+
+                        
+
+
+                      
+
+
+                     
+
+                     
+
+                      
+
+                     
+
+                     
+                      
+
+                       
+                      
+
+
+                      
+
+                       
+
+                       
+
+                       
+
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Reseaux de Transfert</h3>
+                            <p class="text-subtitle text-muted"></p>
+                        </div>
+                        
+                    </div>
+                </div>
+                   <section id="basic-vertical-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Enregistrement d'un reseau de transfert</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                    
+                                           <form class="form form-vertical" action="#" th:action="@{/save_departement}" th:object="${departements}", method="POST">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                         
+                                                            <input type="text" th:field = "*{departement_name}"  id="first-name-vertical"
+                                                                class="form-control" name="fname"
+                                                                placeholder="Entrer le nom du reseau de transfert">
+                                                                    
+                                                        </div>
+                                                    </div>
+                                                   
+                                                  
+                                                    
+                                                   
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit"
+                                                            class="btn btn-primary me-1 mb-1">Enregistrer</button>
+                                                        <button type="reset"
+                                                            class="btn btn-light-secondary me-1 mb-1">Effacer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                          Liste des Reseaux de Transfert
+                        </div>
+                       
+                          
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Nom du Reseau de Transfert</th>
+                                        <th>Date de Creation</th>
+                                        <th>Date de Modification</th>
+                                        <th>Action</th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="liste_departement: ${liste_departements}">
+            <td th:text="${liste_departement.departement_name}"></td>
+             <td></td>
+                 <td></td>
+            <td>
+                <a th:href="@{/modifier_departement/{id}(id=${liste_departement.departement_id})}" class="btn btn-primary">Modifier</a>
+                <a th:href="@{/deleteDepartement/{id}(id=${liste_departement.departement_id})}" class="btn btn-danger">Supprimer</a>
+            </td>
+        </tr>
+                                
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2021 &copy;</p>
+                    </div>
+                    <div class="float-end">
+                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                                href="">CEDRIC OUMBE</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+      <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+       <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+    
+    <script src="assets/js/extensions/sweetalert2.js"></script>
+    <script src="assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+
+<!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:38 GMT -->
+</html>

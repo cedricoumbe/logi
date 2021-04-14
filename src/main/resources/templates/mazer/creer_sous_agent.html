@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
+    <meta charset="ISO-8859-1">
+<!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enregistrement d'un sous agent</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+     <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+          <link th:href="@{/assets/vendors/simple-datatables/style.css}" rel="stylesheet" />
+                 <link th:href="@{/assets/vendors/sweetalert2/sweetalert2.min.css}" rel="stylesheet" />
+          
+     
+  <link th:href="@{/assets/vendors/iconly/bold.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
+  <link th:href="@{/assets/css/app.css}" rel="stylesheet" />
+  <link th:href="@{/assets/images/favicon.html}" rel="image/x-icon" />
+</head>
+
+<body>
+    <div id="app">
+          <div  th:replace="fragments/header :: header"> </div>    
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Gestion des sous agents</h3>
+                            <p class="text-subtitle text-muted"></p>
+                        </div>
+                        
+                    </div>
+                </div>
+                   <section id="basic-vertical-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                                         <h4 class="card-title">Enregistrement d'un sous agent</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                    
+                                           <form   th:action="@{/save_sous_agent}"     class="form form-vertical" action="#"  th:object="${sous_agents}", method="POST">
+                                            
+                         
+                                                      <input type="hidden" th:field = "*{sous_agent_mot_de_passe}" />
+                                            <div class="form-body">
+                                           
+                                                <div class="row">
+                                                 
+                      
+
+                                                      <div class="col-md-4">
+                                                        <label>Nom d'appelation du sous agent</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                        <input type="text"  th:field = "*{sous_agent_nom}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le nom d'appelation du sous agent">
+                                                              
+                                                    </div>
+                                                       <div class="col-md-4">
+                                                        <label>Email du sous agent</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                        <input type="email"  th:field = "*{sous_agent_email}"  id="first-name-vertical" class="form-control"  placeholder="Entrer l'email du sous agent">
+                                                                   
+                                                    </div>
+                                                    
+                                                     <div class="col-md-4">
+                                                        <label>Nom commercial</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       
+                                                          <input type="text"  th:field = "*{sous_agent_nom_commercial}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le nom commercial">
+                                                                       
+                                                    </div>
+                                                    
+                                                     <div class="col-md-4">
+                                                        <label>Adresse</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       
+                                                        <input type="text"  th:field = "*{sous_agent_adresse}"  id="first-name-vertical" class="form-control"  placeholder="Entrer l'adresse">
+                                                                              
+                                                    </div>
+                                                      
+                                                      
+                                                       <div class="col-md-4">
+                                                        <label>Nom de l'operateur</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       
+                                                        <input type="text"  th:field = "*{sous_agent_nom_operateur}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le nom de l'operateur">
+                                                                                  
+                                                    </div>
+                                                     
+                                                      <div class="col-md-4">
+                                                        <label>Contact de l'operateur</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       
+                                                        <input type="text"  th:field = "*{sous_agent_conctact_operateur}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le contact de l'operateur">
+                                                                                       
+                                                    </div>
+                                                      
+                                                      
+                                                      <div class="col-md-4">
+                                                        <label>Reseau de transfert</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       <ul>
+                                                               <li th:each="type : ${liste_reseautransferts}">
+                                                                      <input type="checkbox"  th:id="${type.reseautransfertid}"  th:field="*{reseautransferts}"   th:value="${type.reseautransfertid}"/>
+                                                                      <label th:for="${type.reseautransfertid}" th:text="${type.reseautransfertnom}">name</label>
+                                                                </li>
+                                                            </ul>                                
+                                                    </div>
+                                                      
+                                                  
+                                                   
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit"
+                                                            class="btn btn-primary me-1 mb-1">Enregistrer</button>
+                                                        <button type="reset"
+                                                            class="btn btn-light-secondary me-1 mb-1">Effacer</button>
+                                                    </div>
+                                            
+                                            </div>
+                                              </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+            
+            </div>
+     <div  th:replace="fragments/footer :: footer"> </div>    
+           
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+      <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+       <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+    
+    <script src="assets/js/extensions/sweetalert2.js"></script>
+    <script src="assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+
+<!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:38 GMT -->
+</html>

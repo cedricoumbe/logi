@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
+    
+<!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+     <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+          <link th:href="@{/assets/vendors/simple-datatables/style.css}" rel="stylesheet" />
+                 <link th:href="@{/assets/vendors/sweetalert2/sweetalert2.min.css}" rel="stylesheet" />
+          
+     
+  <link th:href="@{/assets/vendors/iconly/bold.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendors/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
+  <link th:href="@{/assets/css/app.css}" rel="stylesheet" />
+  <link th:href="@{/assets/images/favicon.html}" rel="image/x-icon" />
+</head>
+
+<body>
+  <div id="sidebar" class="active" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                         <a  th:href="@{/accueil}" class='sidebar-link' href="#">
+                            
+                            <img src="" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">LOGI-REPORT</li>
+
+                        <li class="sidebar-item active ">
+                                      <a  th:href="@{/accueil}" class='sidebar-link' href="#">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                       <li class="sidebar-item  ">
+                               <a  th:href="@{/get_operations}" class='sidebar-link' href="#">
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>OPERATIONS</span>
+                            </a>
+                        </li>
+                       
+                        <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Reseaux de transfert</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>CAISSE</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="component-alert.html">Ouverture de caisse</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-badge.html">Fermeture de caisse</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-breadcrumb.html">Clôture de la journée</a>
+                                </li>
+                              
+                            </ul>
+                        </li>
+                          <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>EMPLOYE</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="component-alert.html">Rôle</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-badge.html">Utilisateur</a>
+                                </li>
+                               
+                              
+                            </ul>
+                        </li>
+                          <li class="sidebar-item  ">
+                             
+                                 <a  th:href="@{/get_all_sous_agent}" class='sidebar-link' href="#">
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Sous Agents</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a  th:href="@{/get_reseautransfert}" class='sidebar-link' href="#">
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Reseaux de transfert</span>
+                            </a>
+                        </li>
+                          <li class="sidebar-item  ">
+                         <a  th:href="@{/operation}" class='sidebar-link' href="#">
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Opérations</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Commissions</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Compenses</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item  ">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Reporting</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>

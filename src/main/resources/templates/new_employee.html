@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
+    <meta charset="ISO-8859-1">
+    <title>
+
+        Employee Management System
+
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class ="container my-2">
+    <h1>Employee Management system</h1>
+    <hr>
+    <h2>
+        Save Employee
+    </h2>
+
+    <form action="#" th:action="@{/saveEmployee}" th:object="${employees}", method="POST">
+
+
+
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger" role="alert">
+
+
+            </p>
+
+
+        </table>
+        <input type="text" th:field = "*{firstName}" placeholder="Employee First Name" class="form-control mb-4 col-4">
+
+        <input type="text" th:field = "*{lastName}" placeholder="Employee Last Name"  class="form-control mb-4 col-4">
+
+        <input type="text" th:field = "*{email}" placeholder="Employee Email" class="form-control mb-4 col-4">
+
+
+        <select th:field="*{departement}" class="form-control">
+            <option value="">--Selectionner un departement--</option>
+            <option th:each="liste_departement: ${liste_departements}"
+                    th:value="${liste_departement.departement_id}"
+                    th:text="#{${liste_departement.departement_name}}"/>
+        </select>
+
+        <ul>
+            <li th:each="type : ${liste_competences}">
+                <input type="checkbox"  th:id="${type.competence_id}"  th:field="*{competences}"   th:value="${type.competence_id}"/>
+                <label th:for="${type.competence_id}" th:text="${type.competence_name}">name</label>
+            </li>
+        </ul>
+
+        <button type="submit" class="btn btn-info col-2">Save Employee</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>
+

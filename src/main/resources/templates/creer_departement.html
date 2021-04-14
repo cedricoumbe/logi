@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
+    <meta charset="ISO-8859-1">
+    <title>
+
+        Enregistrement d'un Departement
+
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class ="container my-2">
+
+    <h2>
+        Enregistrement d'un Departement
+    </h2>
+    <form action="#" th:action="@{/save_departement}" th:object="${departements}", method="POST">
+        <input type="text" th:field = "*{departement_name}" placeholder="Nom du Departement" class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2">Enregistrer</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>
+
