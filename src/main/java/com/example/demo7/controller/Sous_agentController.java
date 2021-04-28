@@ -25,6 +25,7 @@ import com.example.demo7.model.Sous_agent;
 import com.example.demo7.service.DepartementService;
 import com.example.demo7.service.ReseautransfertService;
 import com.example.demo7.service.Sous_agentService;
+import com.example.demo7.service.UserService;
 
 @Controller
 public class Sous_agentController {
@@ -32,6 +33,11 @@ public class Sous_agentController {
 
     @Autowired
     private Sous_agentService sous_agent_services;
+    
+    
+    @Autowired
+    private UserService userService;
+    
     
     @Autowired
     private ReseautransfertService reseautransfertServices;
@@ -58,7 +64,8 @@ public class Sous_agentController {
 		
 	        model.addAttribute("sous_agents",sous_agents);
 	        model.addAttribute("liste_reseautransferts",reseautransfertServices.getAllReseautransfert());
-	        
+	        model.addAttribute("liste_users",userService.getAllUser());
+	     
 	      
 	        
 	        return  "mazer/creer_sous_agent";
@@ -93,6 +100,7 @@ public class Sous_agentController {
 		  Sous_agent sous_agents = sous_agent_services.getSous_agentById(sous_agent_id);
 		  model.addAttribute("liste_reseautransferts",reseautransfertServices.getAllReseautransfert());
 	        model.addAttribute("sous_agents",sous_agents);
+	        model.addAttribute("liste_users",userService.getAllUser());
 	      
 	        return  "mazer/modifier_sous_agent";
 

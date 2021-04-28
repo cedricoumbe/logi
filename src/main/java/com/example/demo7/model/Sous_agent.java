@@ -8,6 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.example.demo7.controller.User;
+
 @Entity
 @Table(name="sous_agent")
 public class Sous_agent{
@@ -17,8 +21,7 @@ public class Sous_agent{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sous_agent_id;
 
-    @NotNull
-    @Size(min=2, max=30)
+    @NotEmpty
     @Column(name="sous_agent_nom")
     private String sous_agent_nom;
     
@@ -76,6 +79,18 @@ public class Sous_agent{
             inverseJoinColumns = @JoinColumn(name = "reseautransfertid")
     )
     public Set<Reseautransfert> reseautransferts = new HashSet<>();
+    
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userid", referencedColumnName = "user_id")
+    private User users;
+    
+    
+    
+    
+    
+    
+    
 
 
 	public long getSous_agent_id() {
@@ -198,6 +213,16 @@ public class Sous_agent{
 
 	public void setSous_agent_email(String sous_agent_email) {
 		this.sous_agent_email = sous_agent_email;
+	}
+
+
+	public User getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(User users) {
+		this.users = users;
 	}
 
 

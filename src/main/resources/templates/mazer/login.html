@@ -18,38 +18,62 @@
 <body>
     <div id="auth">
 
+                   
+                    
+                     
+              
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
-                    <div class="auth-logo">
-                       <a  th:href="@{/accueil}" class='sidebar-link' href="#">
-                        <img src="assets/images/logo/logo.png" alt="Logo"></a>
-                    </div>
-                    <h1 class="auth-title">Autentification</h1>
+                 <div class="alert alert-danger" th:if="${param.error}" >Identifiant ou Mot de passe incorrect</div>
+                  <div th:if="${param.logout}"  class="alert alert-info"> 
+                    Vous vous êtes deconnecté
+                </div>
+                
+                <div th:if="${message}"  th:text="${message}" class="alert alert-info"> 
+                 
+                </div>
+                  
+                    <h4 class="auth-title">CP AGENT</h4>
                   
 
-                   <form  th:object="${sous_agents}"   th:action="@{/authentification}" method="post">
+                   <form    th:action="@{/login}" method="post">
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input   th:field = "*{sous_agent_email}"   type="text" class="form-control form-control-xl" placeholder="Email">
+                            <input    name="username"  type="text" class="form-control form-control-xl" placeholder="Email">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" th:field = "*{sous_agent_mot_de_passe}"     class="form-control form-control-xl" placeholder="Mot de Passe">
+                            <input type="password" name="password"    class="form-control form-control-xl" placeholder="Mot de Passe">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                       
+                        <div class="form-check form-check-lg d-flex align-items-end">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                               Se Souvenir de moi
+                            </label>
+                        </div>
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Se connecter</button>
                     </form>
+                     <div class="text-center mt-5 text-lg fs-4">
+                     
+                        <p>
+                          <a  th:href="@{/forgot_password}" class="font-bold" href="#">
+                     
+                        Mot de passe oublier?</a></p>
+                    </div>
                   
                 </div>
             </div>
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right">
-
+                       <a   href="#">
+                        <img width="25%" src="/assets/images/logo/logo_ecpc.png" alt="Logo">
+                        
+                        </a>
                 </div>
             </div>
         </div>

@@ -61,13 +61,27 @@
                                                 <div class="row">
                                                  
                       
+                                                      <div class="col-md-4">
+                                                        <label>Utilisateur</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       <select th:field="*{users}" class="form-control">
+                                                          <option value="">--Selectionner un utilisateur--</option>
+                                                           <option th:each="liste_utilisateur: ${liste_users}"
+                                                               th:value="${liste_utilisateur.id}"
+                                                               th:text="${liste_utilisateur.usernom}"/>
+                                                       </select>    
+                                                    </div>
 
                                                       <div class="col-md-4">
                                                         <label>Nom d'appelation du sous agent</label>
                                                     </div>
                                                     <div class="col-md-8 form-group">
                                                         <input type="text"  th:field = "*{sous_agent_nom}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le nom d'appelation du sous agent">
-                                                              
+                                                         <p th:if="${#fields.hasErrors('sous_agent_nom')}" th:errors="*{sous_agent_nom}" class="alert alert-danger" role="alert">
+
+                                         
+                                                </p>      
                                                     </div>
                                                        <div class="col-md-4">
                                                         <label>Email du sous agent</label>

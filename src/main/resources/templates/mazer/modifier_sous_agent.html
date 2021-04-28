@@ -61,7 +61,18 @@
                                            
                                                 <div class="row">
                                                  
-                      
+                                                  <div class="col-md-4">
+                                                        <label>Utilisateur</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       <select th:field="*{users}" class="form-control">
+                                                            <option th:value="${sous_agents.users.getId()}" th:text="#{${sous_agents.users.getUsernom()}}"  selected="selected" />
+                                                           <option th:each="liste_utilisateur: ${liste_users}"
+                                                               th:value="${liste_utilisateur.id}"
+                                                               th:text="${liste_utilisateur.usernom}"/>
+                                                       </select>    
+                                                    </div>
+
 
                                                          <div class="col-md-4">
                                                         <label>Nom d'appelation du sous agent</label>

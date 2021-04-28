@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.example.demo7.controller.User;
 import com.example.demo7.model.Sous_agent;
 import com.example.demo7.repository.Sous_agentRepository;
 
@@ -64,6 +64,18 @@ public class Sous_agentServiceImpl implements Sous_agentService{
 			Sous_agent sous_agent = null;
 			try {
 				sous_agent = sous_agentRepository.findByUsernameOrEmail(sous_agent_email,sous_agent_mot_de_passe);
+			} catch (Exception e) {
+				throw e;
+			}
+			return sous_agent;
+		}
+
+		@Override
+		public Sous_agent findByUserid(User users) {
+			// TODO Auto-generated method stub
+			Sous_agent sous_agent = null;
+			try {
+				sous_agent = sous_agentRepository.findByUserid(users);
 			} catch (Exception e) {
 				throw e;
 			}

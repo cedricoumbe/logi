@@ -3,7 +3,10 @@ package com.example.demo7.controller;
 
 import com.example.demo7.model.Departement;
 import com.example.demo7.model.Reseautransfert;
+import com.example.demo7.model.Sous_agent;
 import com.example.demo7.service.ReseautransfertService;
+import com.example.demo7.service.Sous_agentService;
+import com.example.demo7.service.UserService;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +21,8 @@ import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,6 +50,13 @@ public class ReseautransfertController {
     private ReseautransfertService reseautransfertService;
     
     
+    @Autowired
+    private UserService userService;
+    
+    
+
+    @Autowired
+    private Sous_agentService sous_agent_services;
    
    // public  String absolutePath = context.getRealPath("resources/assets/images/logo");
    
@@ -62,6 +74,31 @@ public class ReseautransfertController {
     public String listes_reseautransfert(Model model){
     	
     	
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String name = authentication.getName();
+    	
+    	
+    	User users = userService.getUserByUserName(name);
+    	
+    	Sous_agent sous_agents = sous_agent_services.findByUserid(users);
+    	
+    	
+    	//System.out.println(sous_agents.getSous_agent_nom()+"vvvvvvvvv");
+    	  model.addAttribute("name1",name);
+    	
+    	if(sous_agents != null) {
+    		
+    		model.addAttribute("sous_agents",sous_agents);
+
+    	       AccueilConttoller.sous_agent_id = sous_agents.getSous_agent_id();
+    	       return "mazer/accueil";
+    		
+    	}
+    	
+    	
+
+    	
+    	
     	DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
     	Date date = new Date();
     	String date1 = (format.format(date));
@@ -71,11 +108,17 @@ public class ReseautransfertController {
     	 Reseautransfert reseautransferts = new Reseautransfert();
     	 reseautransferts.setReseautransfertdatecre(date1);
     	  model.addAttribute("reseautransferts",reseautransferts);
+    	  
+    
 
           model.addAttribute("liste_reseautransferts",reseautransfertService.getAllReseautransfert());
      
         
         return "mazer/afficher_reseautransfert";
+        
+        
+        
+        
     }
 
 
