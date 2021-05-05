@@ -1,5 +1,7 @@
 package com.example.demo7.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,6 +33,15 @@ public class Reseautransfert{
     
     @Column(name="reseautransfertcodeunique")
     private String reseautransfertcodeunique;
+    
+    
+    
+    @OneToMany(mappedBy = "reseautransfert")
+    private List<Contrat> contrats;
+    
+    
+    
+    
 
     public long getReseautransfertid() {
 		return reseautransfertid;
@@ -78,6 +89,14 @@ public class Reseautransfert{
 
     public void setReseautransfertdatemod(String reseautransfertdatemod) {
 		this.reseautransfertdatemod = reseautransfertdatemod;
+	}
+
+	public List<Contrat> getContrats() {
+		return contrats;
+	}
+
+	public void setContrats(List<Contrat> contrats) {
+		this.contrats = contrats;
 	}
 
   

@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo7.model.Contrat;
 import com.example.demo7.model.Employees;
 import com.example.demo7.model.Reseautransfert;
 import com.example.demo7.model.Sous_agent;
+import com.example.demo7.service.ContratService;
 import com.example.demo7.service.DepartementService;
 import com.example.demo7.service.ReseautransfertService;
 import com.example.demo7.service.Sous_agentService;
@@ -40,6 +42,10 @@ public class Sous_agentController {
     
     
     @Autowired
+    private ContratService contratservice;
+    
+    
+    @Autowired
     private ReseautransfertService reseautransfertServices;
 	
 	
@@ -51,6 +57,114 @@ public class Sous_agentController {
 
 	        return "mazer/afficher_sous_agent";
 	    }
+	 
+	 
+	 @GetMapping("/ligne_sous_agent")
+	    public String ligne_sous_agent_(Model model){
+
+
+	        return "mazer/website";
+	    } 
+	 
+	 
+	
+	 @GetMapping("/creer_contrat/sous_agent/{sous_agent_id}/reseautransfert/{reseautransfertid}")
+		 public String creer_contrat_(@PathVariable("sous_agent_id") int sous_agent_id,  @PathVariable("reseautransfertid") int reseautransfertid, Model model) {
+		 
+		
+		 Sous_agent sous_agents = sous_agent_services.getSous_agentById(sous_agent_id);
+		 
+		 Reseautransfert reseautransferts = reseautransfertServices.getReseautransfertById(reseautransfertid);
+		 
+		 Contrat contrats = new Contrat();
+		 contrats.setSous_agent(sous_agents);
+		 contrats.setReseautransfert(reseautransferts);
+		 
+		 model.addAttribute("contrats",contrats);
+		 model.addAttribute("sous_agents",sous_agents);
+		 model.addAttribute("reseautransferts",reseautransferts);
+		 
+		 model.addAttribute("list_des_contrats",  contratservice.findBysous_agent_reseau_transfert(sous_agents, reseautransferts));
+
+	        return "mazer/creer_contrat";
+	    } 
+	 
+	 @GetMapping("/creer_paiement/sous_agent/{sous_agent_id}/reseautransfert/{reseautransfertid}/contrat_mode_paiement/{contrat_mode_paiement_valeur}")
+	 public String creer_paiement_(@PathVariable("sous_agent_id") int sous_agent_id,  @PathVariable("reseautransfertid") int reseautransfertid,  @PathVariable("contrat_mode_paiement_valeur") int contrat_mode_paiement_valeur, Model model) {
+	 
+	
+	 Sous_agent sous_agents = sous_agent_services.getSous_agentById(sous_agent_id);
+	 
+	 Reseautransfert reseautransferts = reseautransfertServices.getReseautransfertById(reseautransfertid);
+	 
+	 Contrat contrats = new Contrat();
+	 contrats.setSous_agent(sous_agents);
+	 contrats.setReseautransfert(reseautransferts);
+	 contrats.setContrat_mode_paiement(contrat_mode_paiement_valeur);
+	 
+	 model.addAttribute("contrats",contrats);
+	 model.addAttribute("sous_agents",sous_agents);
+	 model.addAttribute("reseautransferts",reseautransferts);
+	 
+	 model.addAttribute("list_des_contrats",  contratservice.findBysous_agent_reseau_transfert(sous_agents, reseautransferts));
+
+        return "mazer/creer_paiement";
+    }  
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 @PostMapping("/save_contrat")
+	 public String saveContrat(@ModelAttribute("contrats") @Valid Contrat contrat, BindingResult bindingResult){
+
+
+        if (bindingResult.hasErrors()) {
+            return "mazer/creer_contrat";
+        }
+        
+        
+    	
+        contratservice.saveContrat(contrat);
+
+
+      
+        
+
+        return "redirect:/creer_contrat/sous_agent/"+contrat.getSous_agent().getSous_agent_id()+"/reseautransfert/"+contrat.getReseautransfert().getReseautransfertid();
+    }
+	 
+	 
+	 @PostMapping("/save_contrat1")
+	 public String saveContrat1_(@ModelAttribute("contrats") @Valid Contrat contrat, BindingResult bindingResult){
+
+
+        if (bindingResult.hasErrors()) {
+            return "mazer/creer_paiement";
+        }
+        
+        
+    	
+        contratservice.saveContrat(contrat);
+
+
+      
+        
+
+        return "redirect:/creer_paiement/sous_agent/"+contrat.getSous_agent().getSous_agent_id()+"/reseautransfert/"+contrat.getReseautransfert().getReseautransfertid()+"/contrat_mode_paiement/"+contrat.getContrat_mode_paiement();
+    }
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 @GetMapping("/create_sous_agent")
 	    public String create_new_sous_agent(Model model){
@@ -115,7 +229,22 @@ public class Sous_agentController {
 	    }
 	 
 	 
-	 
+	  @GetMapping("/delete_contrat/sous_agent/{sous_agent_id}/reseautransfert/{reseautransfertid}")
+		  
+		  public String delete_contrats(@PathVariable("sous_agent_id") int sous_agent_id,  @PathVariable("reseautransfertid") int reseautransfertid, Model model) {
+				   
+		  
+	    
+	         
+			 Sous_agent sous_agents = sous_agent_services.getSous_agentById(sous_agent_id);
+			 
+			 Reseautransfert reseautransferts = reseautransfertServices.getReseautransfertById(reseautransfertid);
+			 
+		     this.contratservice.deleteBysous_agent_reseau_transfert(sous_agents, reseautransferts);
+	         
+		     return "redirect:/creer_contrat/sous_agent/"+sous_agent_id+"/reseautransfert/"+reseautransfertid;
+
+	    }
 
 	
 

@@ -2,6 +2,7 @@ package com.example.demo7.model;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -72,7 +73,7 @@ public class Sous_agent{
 
     
     @NotNull
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "sousagent_reseautransfert",
             joinColumns = @JoinColumn(name = "sous_agent_id"),
@@ -87,7 +88,8 @@ public class Sous_agent{
     
     
     
-    
+    @OneToMany(mappedBy = "sous_agent")
+    private List<Contrat> contrats;
     
     
     
@@ -223,6 +225,16 @@ public class Sous_agent{
 
 	public void setUsers(User users) {
 		this.users = users;
+	}
+
+
+	public List<Contrat> getContrats() {
+		return contrats;
+	}
+
+
+	public void setContrats(List<Contrat> contrats) {
+		this.contrats = contrats;
 	}
 
 

@@ -53,7 +53,8 @@
                                     <div class="buttons">
                                        
                                             <a  th:href="@{/create_sous_agent}" class="btn btn-outline-primary" href="#">
-                                            Nouveau</a>
+                                                 Nouveau
+                                            </a>
                                     
                                     </div>
                                 </div>
@@ -88,8 +89,15 @@
                                     <td th:text="${list_des_sous_agent.sous_agent_nom}"></td>
                                    <td>
                                      <th:block th:each="sous_agent_reseau : ${list_des_sous_agent.reseautransferts}">
-                                          <span th:text="${sous_agent_reseau.getReseautransfertnom} + ' '"></span></br>
-                                               </th:block>
+                                     
+                                         <a th:href="@{/creer_contrat/sous_agent/{sous_agent_id}/reseautransfert/{reseautransfertid}(sous_agent_id = ${list_des_sous_agent.sous_agent_id}, reseautransfertid = ${sous_agent_reseau.getReseautransfertid})}">
+                                      
+                                          <span th:text="${sous_agent_reseau.getReseautransfertnom} + ' '">
+                                          
+                                          </span>       
+                                           </a>
+                                          </br>
+                                      </th:block>
 
                                       </td>
                                     <td th:text="${list_des_sous_agent.sous_agent_nom_commercial}"></td>
