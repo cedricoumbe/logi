@@ -20,11 +20,13 @@ public class Sous_agentServiceImpl implements Sous_agentService{
 	
 	@Autowired
 	private Sous_agentRepository sous_agentRepository;
+	
 
 	@Override
 	public List<Sous_agent> getAllSous_agent() {
 		// TODO Auto-generated method stub
 		return sous_agentRepository.findAll();
+		
 	}
 
 	@Override
@@ -71,7 +73,7 @@ public class Sous_agentServiceImpl implements Sous_agentService{
 		}
 
 		@Override
-		public Sous_agent findByUserid(User users) {
+		public Sous_agent findByUserid(Long users) {
 			// TODO Auto-generated method stub
 			Sous_agent sous_agent = null;
 			try {

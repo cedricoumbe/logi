@@ -2,8 +2,10 @@ package com.example.demo7.controller;
 
 
 import com.example.demo7.model.Departement;
+import com.example.demo7.model.Operation;
 import com.example.demo7.model.Reseautransfert;
 import com.example.demo7.model.Sous_agent;
+import com.example.demo7.service.PlancomptableService;
 import com.example.demo7.service.ReseautransfertService;
 import com.example.demo7.service.Sous_agentService;
 import com.example.demo7.service.UserService;
@@ -15,7 +17,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
@@ -55,6 +60,12 @@ public class ReseautransfertController {
     
     
 
+
+    @Autowired
+    private PlancomptableService plancomptableService;
+    
+    
+
     @Autowired
     private Sous_agentService sous_agent_services;
    
@@ -74,24 +85,70 @@ public class ReseautransfertController {
     public String listes_reseautransfert(Model model){
     	
     	
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	String name = authentication.getName();
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String name = authentication.getName();	
+   	User users = userService.getUserByUserName(name);
+   	Sous_agent sous_agent2s =null;
+ 	Iterator<Sous_agent> list_users = users.getSous_agents().iterator();
+   	
+   	while(list_users.hasNext()){
+   		
+   		sous_agent2s = list_users.next();
+   		break;
+   		
+   	}
+   	
+   	
+   	
+   	/*
+   	
+   	
+   	
+   	List<Sous_agent> list_sous_agents = sous_agent_services.getAllSous_agent();
+   	
+   	for(Sous_agent list_sous_agent:list_sous_agents) {
+   		
+   		for(User list_user:list_sous_agent.getUsers()) {
+   			
+   		        if(list_user.getUsername().equals(users.getUsername())) {
+   		        	
+   		        	sous_agent2s =  list_sous_agent;
+   		        	
+   		        }
+   		}
+   		
+   		
+   		
+   	}
+   	*/
+   	
+   	
+   	
+//System.out.println(users.getSous_agents().toArray().toString());
+   	
+   	
+   	
+   	
+    	
+//Sous_agent sous_agents = sous_agent_services.findByUserid(users.getId());
     	
     	
-    	User users = userService.getUserByUserName(name);
+    	//System.out.println(sous_agents);
+    	 model.addAttribute("name1",name);
     	
-    	Sous_agent sous_agents = sous_agent_services.findByUserid(users);
-    	
-    	
-    	//System.out.println(sous_agents.getSous_agent_nom()+"vvvvvvvvv");
-    	  model.addAttribute("name1",name);
-    	
-    	if(sous_agents != null) {
+    if(sous_agent2s != null) {
     		
-    		model.addAttribute("sous_agents",sous_agents);
+    		model.addAttribute("sous_agents",sous_agent2s);
 
-    	       AccueilConttoller.sous_agent_id = sous_agents.getSous_agent_id();
-    	       return "mazer/accueil";
+           AccueilConttoller.sous_agent_id = sous_agent2s.getSous_agent_id();
+       
+       
+           model.addAttribute("sous_agent_exist",AccueilConttoller.sous_agent_id);
+       
+    	   return "mazer/accueil";
+    	   
+    	   
+    	   
     		
     	}
     	
@@ -110,10 +167,12 @@ public class ReseautransfertController {
     	  model.addAttribute("reseautransferts",reseautransferts);
     	  
     
+    	  
+    	
 
           model.addAttribute("liste_reseautransferts",reseautransfertService.getAllReseautransfert());
      
-        
+          model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
         return "mazer/afficher_reseautransfert";
         
         
@@ -126,10 +185,12 @@ public class ReseautransfertController {
 
 
     @PostMapping("/save_reseautransfert")
-    public String saveReseautransfert(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,@ModelAttribute("reseautransferts") @Valid Reseautransfert reseautransferts, BindingResult bindingResult){
+    public String saveReseautransfert(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,@ModelAttribute("reseautransferts") @Valid Reseautransfert reseautransferts, BindingResult bindingResult,Model model){
 
     	if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
+
+            model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
              return "mazer/afficher_reseautransfert";
           }
     	
@@ -206,6 +267,7 @@ public class ReseautransfertController {
         reseautransferts.setReseautransfertdatecre(reseautransferts.getReseautransfertdatecre());
         model.addAttribute("reseautransferts",reseautransferts);
         model.addAttribute("liste_reseautransferts",reseautransfertService.getAllReseautransfert());
+        model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
         return  "mazer/modifier_reseautransfert";
 
     }

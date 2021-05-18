@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
-    <meta charset="ISO-8859-1">
+  <meta charset="UTF-8">
 <!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:05 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="UTF-8">
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Reseaux de Transfert</title>
 
@@ -66,6 +66,24 @@
                                                                     
                                                         </div>
                                                     </div>
+                                                        <div class="form-group">
+                                                <label for="formFile" class="form-label">Compte Général
+                                                   </label>
+                                                  <fieldset class="form-group">
+                                                       <select th:field="*{plancomptables}" class="form-select" id="basicSelect">
+                                                        
+                                                           <option th:each="liste_plancomptable: ${liste_plancomptables}"
+                                                               th:value="${liste_plancomptable.plancomptable_id}"
+                                                               th:text="${liste_plancomptable.plancomptable_nom}"/>
+                                                       </select>  
+                                                           </fieldset>
+                                                             <p th:if="${#fields.hasErrors('plancomptables')}" th:errors="*{plancomptables}" class="alert alert-danger" role="alert">
+
+                                         
+                                                </p>
+                                               
+                                            </div>
+                                                   
                                                     <input type="hidden"  th:field = "*{reseautransfertdatemod}"  id="first-name-vertical" class="form-control"  >
                                                      
                                                     <input type="hidden" th:field = "*{reseautransfertid}" />
@@ -101,6 +119,8 @@
                                 <thead>
                                     <tr>
                                         <th>Nom du Reseau de Transfert</th>
+                                            <th>Logo</th>
+                                                <th>Compte General</th>
                                         <th>Date de Creation</th>
                                         <th>Date de Modification</th>
                                         <th>Action</th>
@@ -108,16 +128,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="liste_reseautransfert: ${liste_reseautransferts}">
-            <td th:text="${liste_reseautransfert.reseautransfertnom}"></td>
+                               <tr th:each="liste_reseautransfert: ${liste_reseautransferts}">
+            <td th:text="${liste_reseautransfert.reseautransfertnom}">
+            
+         
+            </td>
+            <td>
+               <img src="/photos/${liste_reseautransfert.reseautransfertnomimage}" width="100%" >
+            </td>
+             
+                 <td th:text="${liste_reseautransfert.plancomptables.getPlancomptable_nom()}"></td>
+           
               <td th:text="${liste_reseautransfert.reseautransfertdatecre}"></td>
                <td th:text="${liste_reseautransfert.reseautransfertdatemod}"></td>
             <td>
                 <a th:href="@{/modifier_reseautransfert/{id}(id=${liste_reseautransfert.reseautransfertid})}" class="btn btn-primary">Modifier</a>
                 <a th:href="@{/supprimer_reseautransfert/{id}(id=${liste_reseautransfert.reseautransfertid})}" class="btn btn-danger">Supprimer</a>
             </td>
-        </tr>
-                                
+        </tr>            
                                 
                                 </tbody>
                             </table>

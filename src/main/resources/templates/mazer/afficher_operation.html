@@ -65,6 +65,72 @@
                          
                    </div>
                  </section>
+                    <section id="horizontal-input">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Afficher par periodes</h4>
+                                </div>
+                              <form   th:action="@{/get_operation_periode_par_sous_agent}"     class="form form-vertical" action="#"  th:object="${operations}", method="POST">
+                                    
+                                   
+                                    <input type="hidden"  th:value="1111"    th:field = "*{operation_montant_decaisser}" />
+                                    <input type="hidden"  th:value="aaaaaaaa"    th:field = "*{operation_nom_beneficiaire}" />
+                                    <input type="hidden"  th:value="111"    th:field = "*{operation_montant_payer}" />
+                                         <input type="hidden"  th:value="111"    th:field = "*{operation_numero_transfert_operateur}" />
+                                            
+                                <div class="card-body">
+                                    <div class="row">
+                                       
+                                        <div class="col-md-3">
+                                            <div class="form-group row align-items-center">
+                                             
+                                                <div class="col-lg-10 col-9">
+                                                    <input type="date" th:required="required"  class="form-control"   th:field = "*{operation_date_debut}"
+                                                        placeholder="Date de Debut">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group row align-items-center">
+                                             
+                                                <div class="col-lg-10 col-9">
+                                                    <input type="date" th:required="required" class="form-control" name="fname" th:field = "*{operation_date_fin}"
+                                                        placeholder="Date de fin">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group row align-items-center">
+                                             
+                                                <div class="col-lg-10 col-12">
+                                                     <fieldset class="form-group">
+                                                       <select th:required="required"  th:field="*{reseautransfert}" class="form-select" id="basicSelect">
+                                                          <option value="">--Selectionner un Reseau de transfert-</option>
+                                                           <option  th:each="sous_agent_reseau : ${sous_agents.reseautransferts}"
+                                                               th:value="${sous_agent_reseau.getReseautransfertid}"
+                                                               th:text="${sous_agent_reseau.getReseautransfertnom}"/>
+                                                       </select>  
+                                                           </fieldset> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                             <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit"
+                                                            class="btn btn-primary me-1 mb-1">Afficher</button>
+                                                        <button type="reset"
+                                                            class="btn btn-light-secondary me-1 mb-1">Effacer</button>
+                                                    </div>
+                                            
+                                    </div>
+                                </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                  <section class="section">
                     <div class="card">
                         <div class="card-header">
@@ -100,6 +166,68 @@
                                              <td th:text="${liste_operation.reseautransfert.getReseautransfertnom()}"></td>
                                      
                                          <td th:text="${liste_operation.operation_date_cre}"></td>
+                                    
+                                        <th>Action</td>
+                                    
+                                    </tr>
+                                
+                                </tbody>
+                            </table>
+                            <h2 align="center" th:text="${'Total: ' + nombre_operations}"/>
+                            
+                              <h2 align="center" th:text="${'Total comission: ' + gain}"/>
+                        </div>
+                    </div>
+
+                </section>
+                 <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                          Liste des Operations  emanant du fichier Excel du partenaire
+                        </div>
+                       
+                          
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Numéro Transfert</th>
+                                      
+                                         <th>Montant Payer</th>
+                                        
+                                          <th>Reseau de transfert</th>
+                                        <th>Date de Creation</th>
+                                    
+                                        <th>Action</th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+              <style>      
+  tr.bg-green {
+  background-color:#61ffc5;
+}
+  </style>   
+                              
+                            <tr  th:each="liste_rapprochement, iter: ${liste_rapprochements}"  th:classappend = "${liste_rapprochement.rapprochement_probleme == 1}?'bg-green'" >
+                                              <td th:utext="${iter.count}">No</td>
+                                  
+                                             <td th:text="${liste_rapprochement.rapprochement_numero_transfert}"></td>
+                                             
+                                             
+                                                           
+                                                           
+                                                           <td  th:text="${liste_rapprochement.rapprochement_montant}"></td>
+                                          
+                                             
+                                             
+                                         
+                                      
+                                             <td  th:text="${liste_rapprochement.reseautransfert.getReseautransfertnom()}"></td>
+                                     
+                                         <td th:text="${liste_rapprochement.rapprochement_date_cre}"></td>
                                     
                                         <th>Action</td>
                                     

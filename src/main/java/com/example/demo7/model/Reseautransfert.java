@@ -40,6 +40,12 @@ public class Reseautransfert{
     private List<Contrat> contrats;
     
     
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "plancomptable_id"), name = "plancomptable_id")
+    private Plancomptable plancomptables;
+    
+    
     
     
 
@@ -97,6 +103,14 @@ public class Reseautransfert{
 
 	public void setContrats(List<Contrat> contrats) {
 		this.contrats = contrats;
+	}
+
+	public Plancomptable getPlancomptables() {
+		return plancomptables;
+	}
+
+	public void setPlancomptables(Plancomptable plancomptables) {
+		this.plancomptables = plancomptables;
 	}
 
   

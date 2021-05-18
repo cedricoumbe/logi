@@ -17,7 +17,7 @@ public interface Sous_agentService {
     
     Sous_agent findByUsernameOrEmail(String sous_agent_email,String sous_agent_mot_de_passe);
     
-    Sous_agent findByUserid(User users);
+    Sous_agent findByUserid(Long users);
     
     
 }

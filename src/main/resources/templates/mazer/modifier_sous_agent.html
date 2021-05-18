@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head><!-- Created by Artisteer v4.1.0.59861 -->
-    <meta charset="ISO-8859-1">
+       <meta charset="UTF-8">
 <!-- Mirrored from technext.github.io/mazer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 11:55:05 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modification d'un sous agent</title>
 
@@ -61,26 +61,18 @@
                                            
                                                 <div class="row">
                                                  
-                                                  <div class="col-md-4">
-                                                        <label>Utilisateur</label>
-                                                    </div>
-                                                    <div class="col-md-8 form-group">
-                                                       <select th:field="*{users}" class="form-control">
-                                                            <option th:value="${sous_agents.users.getId()}" th:text="#{${sous_agents.users.getUsernom()}}"  selected="selected" />
-                                                           <option th:each="liste_utilisateur: ${liste_users}"
-                                                               th:value="${liste_utilisateur.id}"
-                                                               th:text="${liste_utilisateur.usernom}"/>
-                                                       </select>    
-                                                    </div>
-
-
-                                                         <div class="col-md-4">
+                                                
+                                                      <div class="col-md-4">
                                                         <label>Nom d'appelation du sous agent</label>
                                                     </div>
                                                     <div class="col-md-8 form-group">
                                                         <input type="text"  th:field = "*{sous_agent_nom}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le nom d'appelation du sous agent">
-                                                              
+                                                         <p th:if="${#fields.hasErrors('sous_agent_nom')}" th:errors="*{sous_agent_nom}" class="alert alert-danger" role="alert">
+
+                                         
+                                                </p>      
                                                     </div>
+
                                                         
                                                       <div class="col-md-4">
                                                         <label>Email du sous agent</label>
@@ -134,7 +126,35 @@
                                                             </ul>                                
                                                     </div>
                                                       
-                                                  
+                                                       
+                                                      <div class="col-md-4">
+                                                        <label>Utilisateurs</label>
+                                                    </div>
+                                                    <div class="col-md-8 form-group">
+                                                       <ul>
+                                                               <li th:each="liste_utilisateur : ${liste_users}">
+                                                                      <input type="checkbox"  th:id="${liste_utilisateur.id}"  th:field="*{users}"   th:value="${liste_utilisateur.id}"/>
+                                                                      <label th:for="${liste_utilisateur.id}" th:text="${liste_utilisateur.usernom}"></label>
+                                                                </li>
+                                                            </ul>                                
+                                                    </div>
+                                                        <div class="col-md-4">
+                                                        <label>Compte Général</label>
+                                                    </div>
+                                                     <div class="col-md-8 form-group">
+                                             
+                                                  <fieldset class="form-group">
+                                                       <select th:field="*{plancomptables}" class="form-select" id="basicSelect">
+                                                      
+                                                           <option th:each="liste_plancomptable: ${liste_plancomptables}"
+                                                               th:value="${liste_plancomptable.plancomptable_id}"
+                                                               th:text="${liste_plancomptable.plancomptable_nom}"/>
+                                                       </select>  
+                                                           </fieldset>
+                                                             <p th:if="${#fields.hasErrors('plancomptables')}" th:errors="*{plancomptables}" class="alert alert-danger" role="alert">
+
+                                         
+                                                </p>
                                                    
                                                     <div class="col-12 d-flex justify-content-end">
                                                         <button type="submit"

@@ -25,6 +25,7 @@ import com.example.demo7.model.Reseautransfert;
 import com.example.demo7.model.Sous_agent;
 import com.example.demo7.service.ContratService;
 import com.example.demo7.service.DepartementService;
+import com.example.demo7.service.PlancomptableService;
 import com.example.demo7.service.ReseautransfertService;
 import com.example.demo7.service.Sous_agentService;
 import com.example.demo7.service.UserService;
@@ -43,6 +44,9 @@ public class Sous_agentController {
     
     @Autowired
     private ContratService contratservice;
+    
+    @Autowired
+    private PlancomptableService plancomptableService;
     
     
     @Autowired
@@ -174,11 +178,14 @@ public class Sous_agentController {
 	        String pwd = RandomStringUtils.random(5, characters );
 	        System.out.println( pwd );
 	        sous_agents.setSous_agent_mot_de_passe(pwd);
+	        
 
+	          model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
+	          model.addAttribute("liste_users",userService.getAllUser());
 		
 	        model.addAttribute("sous_agents",sous_agents);
 	        model.addAttribute("liste_reseautransferts",reseautransfertServices.getAllReseautransfert());
-	        model.addAttribute("liste_users",userService.getAllUser());
+	       
 	     
 	      
 	        
@@ -188,11 +195,14 @@ public class Sous_agentController {
  
 	 
 	 @PostMapping("/save_sous_agent")
-		 public String saveReseautransfert(@ModelAttribute("sous_agents") @Valid Sous_agent sous_agent, BindingResult bindingResult){
+		 public String saveReseautransfert(@ModelAttribute("sous_agents") @Valid Sous_agent sous_agent, BindingResult bindingResult, Model model){
 
 
 	        if (bindingResult.hasErrors()) {
+	            model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
+		          model.addAttribute("liste_users",userService.getAllUser());
 	            return "mazer/creer_sous_agent";
+	            
 	        }
 	        
 	        
@@ -215,6 +225,8 @@ public class Sous_agentController {
 		  model.addAttribute("liste_reseautransferts",reseautransfertServices.getAllReseautransfert());
 	        model.addAttribute("sous_agents",sous_agents);
 	        model.addAttribute("liste_users",userService.getAllUser());
+	        model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
+	          model.addAttribute("liste_users",userService.getAllUser());
 	      
 	        return  "mazer/modifier_sous_agent";
 

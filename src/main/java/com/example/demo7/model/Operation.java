@@ -10,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="operation")
 public class Operation{
@@ -19,23 +21,23 @@ public class Operation{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long operation_id;
 
-
+   
     @Column(name="operation_numero_transfert")
     private Integer operation_numero_transfert;
 
-    
+    @NotEmpty
     @Column(name="operation_nom_beneficiaire",nullable = false)
     private String operation_nom_beneficiaire;
 	
-
+    @NotEmpty
     @Column(name="operation_numero_transfert_operateur",nullable = false)
     private String operation_numero_transfert_operateur;
 	
-   
+    @NotNull
     @Column(name="operation_montant_payer",nullable = false)
     private Integer operation_montant_payer;
     
-	
+    @NotNull
 	 @Column(name="operation_montant_decaisser",nullable = false)
     private Integer operation_montant_decaisser;
     
@@ -48,6 +50,18 @@ public class Operation{
     
     @Column(name="operation_code_unique")
     private String operation_code_unique;
+    
+    
+    @Column(name="operation_date_cre2")
+    private Date operation_date_cre2;
+
+    
+    
+    @NotNull
+    private Date operation_date_debut;
+    
+    @NotNull
+    private Date operation_date_fin;
     
     
     @OneToOne(fetch = FetchType.EAGER)
@@ -131,6 +145,33 @@ public class Operation{
 	public void setOperation_date_cre(Timestamp operation_date_cre) {
 		this.operation_date_cre = operation_date_cre;
 	}
+
+	
+
+	public Date getOperation_date_cre2() {
+		return operation_date_cre2;
+	}
+
+	public void setOperation_date_cre2(Date operation_date_cre2) {
+		this.operation_date_cre2 = operation_date_cre2;
+	}
+
+	public Date getOperation_date_debut() {
+		return operation_date_debut;
+	}
+
+	public void setOperation_date_debut(Date datedebut) {
+		this.operation_date_debut = datedebut;
+	}
+
+	public Date getOperation_date_fin() {
+		return operation_date_fin;
+	}
+
+	public void setOperation_date_fin(Date operation_date_fin) {
+		this.operation_date_fin = operation_date_fin;
+	}
+
 
 	
 

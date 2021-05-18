@@ -59,6 +59,9 @@
                                                       
                                                       <input type="hidden" th:field = "*{reseautransfert}" />  
                                                         <input type="hidden"  th:field = "*{operation_date_cre}">
+                                                            <input type="hidden"  th:field = "*{operation_date_cre2}">
+                                                                     <input type="hidden"  th:field = "*{operation_date_debut}">
+                                                                              <input type="hidden"  th:field = "*{operation_date_fin}">
                                                       
                                             <div class="form-body">
                                            
@@ -70,14 +73,16 @@
                                                     </div>
                                                     <div class="col-md-8 form-group">
                                                         <input type="text"  th:field = "*{operation_numero_transfert_operateur}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le numero de transfert">
-                                                              
+                                                           <p th:if="${#fields.hasErrors('operation_numero_transfert_operateur')}" th:errors="*{operation_numero_transfert_operateur}" class="alert alert-danger" role="alert"> </p>    
+                                                   
                                                     </div>
                                                        <div class="col-md-4">
-                                                        <label>Nom du Beneficiaire</label>
+                                                        <label>Nom du Beneficiairesss</label>
                                                     </div>
                                                     <div class="col-md-8 form-group">
                                                         <input type="text"  th:field = "*{operation_nom_beneficiaire}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le nom du beneficiaire ">
-                                                                   
+                                                           <p th:if="${#fields.hasErrors('operation_nom_beneficiaire')}" th:errors="*{operation_nom_beneficiaire}" class="alert alert-danger" role="alert"> </p>    
+                                                            
                                                     </div>
                                                     
                                                      <div class="col-md-4">
@@ -86,7 +91,7 @@
                                                     <div class="col-md-8 form-group">
                                                        
                                                           <input type="text"  th:field = "*{operation_montant_payer}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le montant payer">
-                                                                       
+                                                             <p th:if="${#fields.hasErrors('operation_montant_payer')}" th:errors="*{operation_montant_payer}" class="alert alert-danger" role="alert"> </p>             
                                                     </div>
                                                     
                                                      <div class="col-md-4">
@@ -97,7 +102,7 @@
                                                     <div class="col-md-8 form-group">
                                                        
                                                         <input type="number"  th:field = "*{operation_montant_decaisser}"  id="first-name-vertical" class="form-control"  placeholder="Entrer le montant decaissé">
-                                                                              
+                                                             <p th:if="${#fields.hasErrors('operation_montant_decaisser')}" th:errors="*{operation_montant_decaisser}" class="alert alert-danger" role="alert"> </p>                     
                                                     </div>
                                                      
                                                      

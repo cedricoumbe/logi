@@ -27,25 +27,33 @@
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a  th:href="@{/accueil}" class='sidebar-link' href="#">
-                           <img width="15%" src="/assets/images/logo/logo_ecpc.png" alt="Logo" srcset="">
-                            </a>
-                         
-                        </div>
+                        
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
                 </div>
-               
+             
+                        
+                          <div class="row">
+                                       
+                                        <div style="padding-left:60px" class="col-md-6">
+                                              <a  th:href="@{/accueil}" class='sidebar-link' href="#">
+                                                     <img width="100%" src="/assets/images/logo/logo_ecpc.png" alt="Logo" srcset="">
+                                               </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                                            
+                                                <form th:action="@{/logout}" method="post">
+                                  
+                                                <h6 th:text="${'Bienvenue - ' + name1}"/>
+                                                 <input type="submit" value="Se Déconnecter" /> 
+              		                          </form>
+              		                          	
+                                        </div>
+                                         </div>
                 <div class="sidebar-menu">
-                             <form th:action="@{/logout}" method="post">
-              <h6 th:text="${'Bienvenue - ' + name1}"/>
-              
-              
-		<input type="submit" value="Se Déconnecter" />   
-			</form>
+                  
                     <ul class="menu">
                     <li class="sidebar-title ">
                     
@@ -78,20 +86,15 @@
                             </ul>
                         </li>
 	         
-                    
-                       
-                        <li class="sidebar-item  ">
-                            <a href="table.html" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Reseaux de transfert</span>
-                            </a>
-                        </li>
                          <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
-                                <span>CAISSE</span>
+                                <span>CAISSES</span>
                             </a>
                             <ul class="submenu ">
+                              <li class="submenu-item ">
+                                    <a th:href="@{/get_caisse}">Caisse</a>
+                                </li>
                                 <li class="submenu-item ">
                                     <a href="component-alert.html">Ouverture de caisse</a>
                                 </li>
@@ -101,6 +104,26 @@
                                 <li class="submenu-item ">
                                     <a href="component-breadcrumb.html">Clôture de la journée</a>
                                 </li>
+                              
+                            </ul>
+                        </li>
+                         <li class="sidebar-item  has-sub">
+                                  <a  class='sidebar-link' href="#">
+                                <i class="bi bi-stack"></i>
+                                <span>Comptabilité</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                              
+                                      <a  th:href="@{/liste_plancomptable}" class='sidebar-link' href="#">
+                                    Plan Comptable</a>
+                                </li>
+                                <li class="submenu-item ">
+                                   
+                                              <a  th:href="@{/get_user}" class='sidebar-link' href="#">
+                                    Journal Comptable</a>
+                                </li>
+                               
                               
                             </ul>
                         </li>
@@ -138,7 +161,7 @@
                             </a>
                         </li>
                           <li class="sidebar-item  ">
-                         <a  th:href="@{/operation}" class='sidebar-link' href="#">
+                         <a  th:href="@{/get_all_operations}" class='sidebar-link' href="#">
                                 <i class="bi bi-grid-1x2-fill"></i>
                                 <span>Opérations</span>
                             </a>
@@ -164,6 +187,9 @@
                        
                     </ul>
                 </div>
+               
+                    
+	
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>

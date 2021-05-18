@@ -86,7 +86,11 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="list_des_sous_agent: ${list_des_sous_agents}">
-                                    <td th:text="${list_des_sous_agent.sous_agent_nom}"></td>
+                                    <td >
+                                         <span th:text="${list_des_sous_agent.sous_agent_nom}">
+                                    
+                                    
+                                    </td>
                                    <td>
                                      <th:block th:each="sous_agent_reseau : ${list_des_sous_agent.reseautransferts}">
                                      

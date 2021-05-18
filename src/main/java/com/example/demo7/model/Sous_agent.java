@@ -1,5 +1,6 @@
 package com.example.demo7.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +16,7 @@ import com.example.demo7.controller.User;
 
 @Entity
 @Table(name="sous_agent")
-public class Sous_agent{
+public class Sous_agent implements Serializable{
 
 
     @Id
@@ -81,10 +82,19 @@ public class Sous_agent{
     )
     public Set<Reseautransfert> reseautransferts = new HashSet<>();
     
+    
+    
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userid", referencedColumnName = "user_id")
-    private User users;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "sousagent_users",
+            joinColumns = @JoinColumn(name = "sous_agent_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+	private Set<User> users = new HashSet<>();
+    
+    
+  
     
     
     
@@ -92,7 +102,10 @@ public class Sous_agent{
     private List<Contrat> contrats;
     
     
-    
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "plancomptable_id"), name = "plancomptable_id")
+    private Plancomptable plancomptables;
 
 
 	public long getSous_agent_id() {
@@ -218,15 +231,7 @@ public class Sous_agent{
 	}
 
 
-	public User getUsers() {
-		return users;
-	}
-
-
-	public void setUsers(User users) {
-		this.users = users;
-	}
-
+	
 
 	public List<Contrat> getContrats() {
 		return contrats;
@@ -235,6 +240,26 @@ public class Sous_agent{
 
 	public void setContrats(List<Contrat> contrats) {
 		this.contrats = contrats;
+	}
+
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
+
+	public Plancomptable getPlancomptables() {
+		return plancomptables;
+	}
+
+
+	public void setPlancomptables(Plancomptable plancomptables) {
+		this.plancomptables = plancomptables;
 	}
 
 
