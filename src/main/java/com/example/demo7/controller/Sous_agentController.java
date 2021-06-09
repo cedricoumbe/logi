@@ -2,7 +2,10 @@ package com.example.demo7.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo7.model.Contrat;
 import com.example.demo7.model.Employees;
+import com.example.demo7.model.Operation;
 import com.example.demo7.model.Reseautransfert;
 import com.example.demo7.model.Sous_agent;
 import com.example.demo7.service.ContratService;
@@ -174,14 +178,44 @@ public class Sous_agentController {
 	    public String create_new_sous_agent(Model model){
 		    Sous_agent sous_agents = new Sous_agent();
 		 
-		  String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	        String pwd = RandomStringUtils.random(5, characters );
 	        System.out.println( pwd );
 	        sous_agents.setSous_agent_mot_de_passe(pwd);
 	        
 
-	          model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
-	          model.addAttribute("liste_users",userService.getAllUser());
+	        model.addAttribute("liste_plancomptables",plancomptableService.find_all_plancomptable_By_Plancomptable());
+	        
+	    	List<Sous_agent> list_sous_agents = sous_agent_services.getAllSous_agent();
+	     	
+         	List<User> list_user_affiches = new ArrayList<User>();
+	    	
+	    	for(User list_users:userService.getAllUser()) {
+	    		Sous_agent sous_agent2s =null;
+	    		
+	    		Iterator<Sous_agent> liste_sous_agents = list_users.getSous_agents().iterator();
+	    		
+	    	  	while(liste_sous_agents.hasNext()){
+	    	  		
+	    	  		sous_agent2s = liste_sous_agents.next();
+		       		break;
+	    	  		
+	    	  		
+	    	  	}
+	    	  	
+	    	  	if(sous_agent2s==null) {
+	    	  		
+	    	  		list_user_affiches.add(list_users);
+	    	  	}
+		       	
+	    		
+	    	}
+	    	
+	    	
+	    	
+	    
+	        
+	        model.addAttribute("liste_users",list_user_affiches);
 		
 	        model.addAttribute("sous_agents",sous_agents);
 	        model.addAttribute("liste_reseautransferts",reseautransfertServices.getAllReseautransfert());

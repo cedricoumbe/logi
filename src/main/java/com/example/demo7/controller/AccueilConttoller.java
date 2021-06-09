@@ -2,10 +2,12 @@ package com.example.demo7.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +26,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo7.model.Item;
 import com.example.demo7.model.Mail;
 import com.example.demo7.model.PasswordResetToken;
+import com.example.demo7.model.Reseautransfert;
 import com.example.demo7.model.Sous_agent;
 import com.example.demo7.repository.PasswordResetTokenRepository;
 import com.example.demo7.service.EmailService;
+import com.example.demo7.service.OperationService;
 import com.example.demo7.service.ReseautransfertService;
 import com.example.demo7.service.Sous_agentService;
 import com.example.demo7.service.UserService;
@@ -36,6 +40,20 @@ public class AccueilConttoller {
 	
 
 	 public static long sous_agent_id=0 ;
+	 public static long users_id=0 ;
+	 
+	   
+	  
+			// create a java calendar instance
+			  Calendar calendar = Calendar.getInstance();
+
+			  // get a java date (java.util.Date) from the Calendar instance.
+			  // this java date will represent the current date, or "now".
+			  java.util.Date currentDate = calendar.getTime();
+
+			  // now, create a java.sql.Date from the java.util.Date
+			  java.sql.Date date1 = new java.sql.Date(currentDate.getTime());
+	
 
     @Autowired
     private Sous_agentService sous_agent_services;
@@ -54,6 +72,76 @@ public class AccueilConttoller {
     
     @Autowired
     private ReseautransfertService reseautransfertService;
+    
+    @Autowired
+    private OperationService operation_services;
+    
+    
+  
+    
+    @GetMapping("/accueil_admin")
+    public String affiche_page_accueil2(Model model){
+    	
+    	
+    	
+    	  model.addAttribute("sous_agents",sous_agent_services.getAllSous_agent()); 
+    	  
+    	  
+    	  HashMap m = new HashMap () ; 
+		   
+			for(Sous_agent sous_agents:sous_agent_services.getAllSous_agent()) {
+				
+				
+				Long total_encaissement = operation_services.find_all_sum_aujourdhui_operation_By_Sous_agent(sous_agents, date1);
+				
+			  
+			    
+			    
+			    
+		
+				
+				m.put(sous_agents, total_encaissement);
+				
+			}
+		   
+			User users = userService.getUserById(AccueilConttoller.users_id);
+			
+			model.addAttribute("nom_user",users.getUsernom());  
+    	  
+    	  
+			model.addAttribute("map_sous_agent",m);  
+			
+			
+			   Map<String, Integer> graphData2 = new TreeMap<>();
+			   
+				for(Sous_agent sous_agents:sous_agent_services.getAllSous_agent()) {
+					
+					
+					Long total_encaissement = operation_services.find_all_sum_aujourdhui_operation_By_Sous_agent(sous_agents, date1);
+					
+					
+						   graphData2.put(sous_agents.getSous_agent_nom(), total_encaissement.intValue());
+						
+						
+						
+					}
+			
+			
+			
+			
+			
+			
+			
+			     model.addAttribute("chartData2", graphData2);
+				   	
+			
+			
+			
+
+        return "mazer/accueil2";
+    }
+    
+    
 	
     @GetMapping("/login")
     public String affiche_page_login(Model model){
@@ -77,7 +165,7 @@ public class AccueilConttoller {
     }
   
     
-    
+  
     
     
     
@@ -86,7 +174,97 @@ public class AccueilConttoller {
 
 		   model.addAttribute("liste_reseautransferts",reseautransfertService.getAllReseautransfert());
 		   Sous_agent sous_agents = sous_agent_services.getSous_agentById(AccueilConttoller.sous_agent_id);
+		   
+		   
+		   HashMap m = new HashMap () ; 
+		   
+			for(Reseautransfert list_reseau_transfert:sous_agents.getReseautransferts()) {
+				
+				
+				Long total_encaissement = operation_services.find_all_sum_reseau_trasfert_aujourdhui_operation_By_Sous_agent(sous_agents, date1, list_reseau_transfert);
+				
+				
+				
+				m.put(list_reseau_transfert, total_encaissement);
+				
+			}
+		   
+		   
+		   
+		   
+		      model.addAttribute("liste_operations",operation_services.find_all_aujourdhui_operation_By_Sous_agent(sous_agents, date1));
+	    				   
+		   
+			  model.addAttribute("map_reseau",m);  
+		   
+			    model.addAttribute("sous_agent_exist",AccueilConttoller.sous_agent_id);
+		   
 		   model.addAttribute("sous_agents",sous_agents); 
+		   
+		   
+		   
+		   Map<String, Integer> graphData = new TreeMap<>();
+		   
+		   Map<String, Integer> graphData2 = new TreeMap<>();
+		   
+		  for(Reseautransfert list_reseau_transfert:sous_agents.getReseautransferts()) {
+				
+				
+				Long total_encaissement = operation_services.find_all_sum_reseau_trasfert_aujourdhui_operation_By_Sous_agent(sous_agents, date1, list_reseau_transfert);
+				
+				   graphData2.put(list_reseau_transfert.getReseautransfertnom(), total_encaissement.intValue());
+				
+				
+				
+			}
+		  String month = "";
+		   
+		   for(int i=1; i<=12; i++) {
+			   
+			   
+			   
+				Long total_encaissement = operation_services.find_all_sum_operation_By_reseau_transfert_month_Sous_agent(sous_agents, i);
+				   
+				/*if(i==1) {month="Jan"; }
+				if(i==2) {month="Fev"; }
+				if(i==3) {month="Mar"; }
+				if(i==4) {month="Av"; }
+				if(i==5) {month="Mai"; }
+				if(i==6) {month="Jui"; }
+				if(i==7) {month="Juil"; }
+				if(i==8) {month="Aout"; }
+				if(i==9) {month="sep"; }
+				if(i==10) {month="Oct"; }
+				if(i==11) {month="Nov"; }
+				if(i==12) {month="Dec"; }*/
+				
+				
+				
+				graphData.put(i+"", total_encaissement.intValue());
+			   
+		   }
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+	     
+	        model.addAttribute("chartData", graphData);
+	
+		   
+	        model.addAttribute("chartData2", graphData2);
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
 	        return "mazer/accueil";
 	    }
 	 

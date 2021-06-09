@@ -88,6 +88,7 @@ public class ReseautransfertController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String name = authentication.getName();	
    	User users = userService.getUserByUserName(name);
+    AccueilConttoller.users_id = users.getId();
    	Sous_agent sous_agent2s =null;
  	Iterator<Sous_agent> list_users = users.getSous_agents().iterator();
    	
@@ -134,26 +135,27 @@ public class ReseautransfertController {
     	
     	
     	//System.out.println(sous_agents);
-    	 model.addAttribute("name1",name);
+    	 model.addAttribute("name1",users.getUsernom());
     	
-    if(sous_agent2s != null) {
+      if(sous_agent2s != null){
     		
     		model.addAttribute("sous_agents",sous_agent2s);
 
            AccueilConttoller.sous_agent_id = sous_agent2s.getSous_agent_id();
        
        
-           model.addAttribute("sous_agent_exist",AccueilConttoller.sous_agent_id);
-       
-    	   return "mazer/accueil";
+      
     	   
-    	   
-    	   
+    	   return "redirect:/accueil";
     		
     	}
     	
-    	
-
+      if(sous_agent2s == null){
+    	  
+    	   return "redirect:/accueil_admin";
+    	  
+    	  
+      }
     	
     	
     	DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -172,7 +174,7 @@ public class ReseautransfertController {
 
           model.addAttribute("liste_reseautransferts",reseautransfertService.getAllReseautransfert());
      
-          model.addAttribute("liste_plancomptables",plancomptableService.getAllPlancomptable());
+          model.addAttribute("liste_plancomptables",plancomptableService.find_all_plancomptable_By_Plancomptable());
         return "mazer/afficher_reseautransfert";
         
         

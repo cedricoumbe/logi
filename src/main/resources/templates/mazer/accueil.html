@@ -8,6 +8,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
+    <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"></script>
+    
 
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
@@ -41,7 +47,7 @@
                         
                         
                         
-                            <div class="col-6 col-lg-3 col-md-6"  th:each="sous_agent_reseau : ${sous_agents.reseautransferts}">
+                            <div class="col-6 col-lg-3 col-md-6"  th:each="sous_agent_reseau : ${map_reseau}">
                                 <div class="card">
                                     <div class="card-body px-3 py-4-5">
                                         <div class="row">
@@ -51,8 +57,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold" th:text="${sous_agent_reseau.getReseautransfertnom}" ></h6>
-                                                <h6 class="font-extrabold mb-0">00</h6>
+                                                <h6 class="text-muted font-semibold" th:text="${sous_agent_reseau.key.getReseautransfertnom}" ></h6>
+                                                <h6 class="font-extrabold mb-0" th:text="${sous_agent_reseau.value}" ></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -66,16 +72,33 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
+                                        <h4>Statistique par reseaux de transfert</h4>
+                                    </div>
+                                    <div class="card-body">
+                                          <div id="chart_div2"></div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
                                         <h4>Statistique sur toute l'année</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div id="chart-profile-visit"></div>
+                                          <div id="chart_div"></div>
                                     </div>
                                 </div>
+                             
+                                   <div class="card">
+                            <div class="card-header">
+                                <h4>Statistiques</h4>
+                            </div>
+                            <div class="card-body">
+                               <div id="piechart2" style="width:100%;"></div>
+                            </div>
+                        </div>
                             </div>
                         </div>
                         <div class="row">
-                           
+                          
                          
                         </div>
                     </div>
@@ -98,47 +121,132 @@
                                 <h4>Opérations recentes</h4>
                             </div>
                             <div class="card-content pb-4">
-                                <div class="recent-message d-flex px-4 py-3">
+                                <div class="recent-message d-flex px-4 py-3" th:each="liste_operation, iter: ${liste_operations}">
                                     <div class="avatar avatar-lg">
                                         <img src="assets/images/faces/4.jpg">
                                     </div>
                                     <div class="name ms-4">
-                                        <h5 class="mb-1">Hank Schrader</h5>
-                                        <h6 class="text-muted mb-0">00 FCFA</h6>
+                                        <h5 class="mb-1" th:text="${liste_operation.operation_nom_beneficiaire}"></h5>
+                                        <h6 class="text-muted mb-0" th:text="${liste_operation.operation_montant_decaisser+' FCFA'}"></h6>
                                     </div>
                                 </div>
-                                <div class="recent-message d-flex px-4 py-3">
-                                    <div class="avatar avatar-lg">
-                                        <img src="assets/images/faces/5.jpg">
-                                    </div>
-                                    <div class="name ms-4">
-                                        <h5 class="mb-1">Dean Winchester</h5>
-                                        <h6 class="text-muted mb-0">00 FCFA</h6>
-                                    </div>
-                                </div>
-                                <div class="recent-message d-flex px-4 py-3">
-                                    <div class="avatar avatar-lg">
-                                        <img src="assets/images/faces/1.jpg">
-                                    </div>
-                                    <div class="name ms-4">
-                                        <h5 class="mb-1">John Dodol</h5>
-                                        <h6 class="text-muted mb-0">00 FCFA</h6>
-                                    </div>
-                                </div>
+                              
+                                
                                
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                <h4>Statistiques</h4>
+                                <h4>Statistiques par reseau de transfert</h4>
                             </div>
                             <div class="card-body">
-                                <div id="chart-visitors-profile"></div>
+                               <div id="piechart" style="width:100%;"></div>
                             </div>
                         </div>
                     </div>
                 </section>
+           
+                  
+                 
+                  
+                  
             </div>
+               <script th:inline="javascript">
+        var real_data = /*[[${chartData}]]*/'noValue';
+ 
+        $(document).ready(function() {
+            google.charts.load('current', {
+                packages : [ 'corechart', 'bar' ]
+            });
+            google.charts.setOnLoadCallback(drawColumnChart);
+            google.charts.setOnLoadCallback(drawPieChart);
+        });
+ 
+        function drawColumnChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Year');
+            data.addColumn('number', 'Montant des paiements');
+            Object.keys(real_data).forEach(function(key) {
+                data.addRow([ key, real_data[key] ]);
+            });
+            var options = {
+                title : '',
+                hAxis : {
+                    title : 'Mois de l année ',
+                },
+                vAxis : {
+                    title : 'Montant des paiements'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document
+                    .getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+ 
+        function drawPieChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Year');
+            data.addColumn('number', 'Montant des paiements');
+            Object.keys(real_data).forEach(function(key) {
+                data.addRow([ key, real_data[key] ]);
+            });
+            var options = {
+                title : ''
+            };
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+    
+    
+      <script th:inline="javascript">
+        var real_data2 = /*[[${chartData2}]]*/'noValue';
+ 
+        $(document).ready(function() {
+            google.charts.load('current', {
+                packages : [ 'corechart', 'bar' ]
+            });
+            google.charts.setOnLoadCallback(drawColumnChart2);
+            google.charts.setOnLoadCallback(drawPieChart2);
+        });
+ 
+        function drawColumnChart2() {
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('string', 'Year');
+            data2.addColumn('number', 'Montant des paiements');
+            Object.keys(real_data2).forEach(function(key) {
+                data2.addRow([ key, real_data2[key] ]);
+            });
+            var options = {
+                title : '',
+                hAxis : {
+                    title : 'Reseau de transferts',
+                },
+                vAxis : {
+                    title : 'Montant des paiements'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document
+                    .getElementById('chart_div2'));
+            chart.draw(data2, options);
+        }
+ 
+        function drawPieChart2() {
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('string', 'Year');
+            data2.addColumn('number', 'Montant des paiements');
+            Object.keys(real_data2).forEach(function(key) {
+                data2.addRow([ key, real_data2[key] ]);
+            });
+            var options = {
+                title : ''
+            };
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('piechart2'));
+            chart.draw(data2, options);
+        }
+    </script>
 
             <footer>
                 <div class="footer clearfix mb-0 text-muted">

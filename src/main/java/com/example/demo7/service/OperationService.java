@@ -3,6 +3,8 @@ package com.example.demo7.service;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import com.example.demo7.model.Operation;
 import com.example.demo7.model.Reseautransfert;
 import com.example.demo7.model.Sous_agent;
@@ -31,6 +33,15 @@ public interface OperationService {
 		  Long  find_all_sum_operation_By_date_debut_date_fin_Sous_agent(Sous_agent sous_agent,java.util.Date date_debut, java.util.Date date_fin);
 			 Long find_all_sum_operation_By_reseau_transfert_date_debut_date_fin_Sous_agent(Sous_agent sous_agent,Reseautransfert reseautransfert,java.util.Date date_debut, java.util.Date date_fin);
 			 public  Long  find_all_sum_aujourdhui_operation_By_Sous_agent(Sous_agent sous_agent,java.util.Date date_debut);
-	   // Operation  find_by_sous_agent_reseautransfert_operation_numero_transfert_Sous_agent(Sous_agent sous_agent,Reseautransfert reseautransfert,String operation_numero_transfert_operateur);
+	   Operation  find_by_sous_agent_reseautransfert_operation_numero_transfert_Sous_agent(Sous_agent sous_agent,Reseautransfert reseautransfert,String operation_numero_transfert_operateur);
 	    
+	   public  Long  find_all_sum_reseau_trasfert_aujourdhui_operation_By_Sous_agent(Sous_agent sous_agent,java.util.Date date_debut,Reseautransfert reseautransfert);
+
+		 List<Operation> find_all_dernier_aujourdhui_operation_By_Sous_agent( Sous_agent sous_agent,java.util.Date date_debut);
+		 
+		 public  Long   find_all_rapprocher_sum_operation_By_reseau_transfert_date_debut_date_fin_Sous_agent(Sous_agent sous_agent,Reseautransfert reseautransfert,java.util.Date date_debut, java.util.Date date_fin);
+		 public  Long  find_all_rapprocher_sum_aujourdhui_operation_By_Sous_agent(Sous_agent sous_agent,java.util.Date date_debut); 
+		 
+		 public  Long   find_all_sum_operation_By_reseau_transfert_month_Sous_agent(Sous_agent sous_agent,int month);
+		 
 }

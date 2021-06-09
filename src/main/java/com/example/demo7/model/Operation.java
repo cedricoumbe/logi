@@ -56,12 +56,18 @@ public class Operation{
     private Date operation_date_cre2;
 
     
+    @Column(name="operation_valider")
+    private int operation_valider;
     
     @NotNull
     private Date operation_date_debut;
     
     @NotNull
     private Date operation_date_fin;
+    
+    
+    @Column(name="operation_rapprocher")
+    private int operation_rapprocher;
     
     
     @OneToOne(fetch = FetchType.EAGER)
@@ -170,6 +176,22 @@ public class Operation{
 
 	public void setOperation_date_fin(Date operation_date_fin) {
 		this.operation_date_fin = operation_date_fin;
+	}
+
+	public int getOperation_valider() {
+		return operation_valider;
+	}
+
+	public void setOperation_valider(int operation_valider) {
+		this.operation_valider = operation_valider;
+	}
+
+	public int getOperation_rapprocher() {
+		return operation_rapprocher;
+	}
+
+	public void setOperation_rapprocher(int operation_rapprocher) {
+		this.operation_rapprocher = operation_rapprocher;
 	}
 
 

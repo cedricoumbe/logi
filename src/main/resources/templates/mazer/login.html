@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/pages/auth.css">
 </head>
 
-<body>
+<body bgcolor="red">
     <div id="auth">
 
                    
@@ -23,7 +23,13 @@
                      
               
         <div class="row h-100">
-            <div class="col-lg-5 col-12">
+          <div class="col-lg-3 d-none d-lg-block">
+                <div id="auth-center">
+                       
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+            
                 <div id="auth-left">
                  <div class="alert alert-danger" th:if="${param.error}" >Identifiant ou Mot de passe incorrect</div>
                   <div th:if="${param.logout}"  class="alert alert-info"> 
@@ -34,7 +40,9 @@
                  
                 </div>
                   
-                    <h4 class="auth-title">CP AGENT</h4>
+                    <h6 align='center' class="auth-title">
+                      <img align='center' width="20%" src="/assets/images/logo/logo_ecpc.png" alt="Logo" srcset="">
+                  </br>  CP AGENT</h6>
                   
 
                    <form    th:action="@{/login}" method="post">
@@ -68,12 +76,9 @@
                   
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-                       <a   href="#">
-                        <img width="100%" src="/assets/images/logo/logo_ecpc.png" alt="Logo">
-                        
-                        </a>
+            <div class="col-lg-3 d-none d-lg-block">
+                <div id="auth-center">
+                     
                 </div>
             </div>
         </div>

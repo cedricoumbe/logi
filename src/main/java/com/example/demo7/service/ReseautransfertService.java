@@ -15,4 +15,6 @@ public interface ReseautransfertService {
     Reseautransfert getReseautransfertById(long id);
 
     void deleteReseautransfertById(long id);
+    
+    
 }

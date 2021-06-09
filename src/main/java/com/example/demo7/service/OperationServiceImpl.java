@@ -68,7 +68,7 @@ public class OperationServiceImpl implements OperationService{
 	@Override
 	public Operation find_by_sous_agent_reseautransfert_operation_numero_transfert_Sous_agent(String operation_numero_transfert_operateur) {
 		// TODO Auto-generated method stub
-	     Operation operations =	operationRepository.find_by_sous_agent_reseautransfert_operation_numero_transfert_Sous_agent(operation_numero_transfert_operateur);
+	     Operation operations =	operationRepository.find_by_sous_agent_reseautransfert_operation_numero_transfert_Sous_agent1(operation_numero_transfert_operateur);
 		return operations;
 	}
 
@@ -106,8 +106,19 @@ public class OperationServiceImpl implements OperationService{
 	@Override
 	public Long find_all_sum_operation_By_reseau_transfert_date_debut_date_fin_Sous_agent(Sous_agent sous_agent,
 			Reseautransfert reseautransfert, java.util.Date date_debut, java.util.Date date_fin) {
-		// TODO Auto-generated method stub
-		return  operationRepository.find_all_sum_operation_By_reseau_transfert_date_debut_date_fin_Sous_agent(sous_agent, reseautransfert, date_debut, date_fin);
+	
+		
+		Long total = operationRepository.find_all_sum_operation_By_reseau_transfert_date_debut_date_fin_Sous_agent(sous_agent, reseautransfert, date_debut, date_fin);
+		
+		
+		if(total == null) {
+			 
+			return (long) 0;
+		}else {
+			
+			return total;
+		}
+	
 	}
 
 	@Override
@@ -124,11 +135,26 @@ public class OperationServiceImpl implements OperationService{
 	@Override
 	public Long find_all_sum_aujourdhui_operation_By_Sous_agent(Sous_agent sous_agent, java.util.Date date_debut) {
 		// TODO Auto-generated method stub
-		return  operationRepository.find_all_sum_aujourdhui_operation_By_Sous_agent(sous_agent,date_debut);
+	
+		Long total =   operationRepository.find_all_sum_aujourdhui_operation_By_Sous_agent(sous_agent,date_debut);
+		
+		if(total == null) {
+			 
+			return (long) 0;
+		}else {
+			
+			return  operationRepository.find_all_sum_aujourdhui_operation_By_Sous_agent(sous_agent,date_debut);
+		}
+		
+		
+		
+		
+		
+		
 	}
 
 
-/*
+
 	@Override
 	public Operation find_by_sous_agent_reseautransfert_operation_numero_transfert_Sous_agent(Sous_agent sous_agent,
 			Reseautransfert reseautransfert, String operation_numero_transfert_operateur) {
@@ -136,7 +162,79 @@ public class OperationServiceImpl implements OperationService{
 	     Operation operations =	operationRepository.find_by_sous_agent_reseautransfert_operation_numero_transfert_Sous_agent(sous_agent, reseautransfert, operation_numero_transfert_operateur);
 		return operations;
 	}
-	*/
+
+	@Override
+	public Long find_all_sum_reseau_trasfert_aujourdhui_operation_By_Sous_agent(Sous_agent sous_agent,
+			java.util.Date date_debut, Reseautransfert reseautransfert) {
+		
+		Long total = operationRepository.find_all_sum_reseau_trasfert_aujourdhui_operation_By_Sous_agent(sous_agent, date_debut, reseautransfert);
+		
+		if(total == null) {
+			 
+			return (long) 0;
+		}else {
+			
+			return operationRepository.find_all_sum_reseau_trasfert_aujourdhui_operation_By_Sous_agent(sous_agent, date_debut, reseautransfert);
+		}
+		
+		
+	}
+
+	@Override
+	public List<Operation> find_all_dernier_aujourdhui_operation_By_Sous_agent(Sous_agent sous_agent,
+			java.util.Date date_debut) {
+		List<Operation> list_operations = new ArrayList<Operation>();
+        operationRepository.find_all_dernier_aujourdhui_operation_By_Sous_agent(sous_agent, date_debut).forEach(list_operations::add);
+		
+		
+		
+		return list_operations;
+	}
+
+	@Override
+	public Long find_all_rapprocher_sum_operation_By_reseau_transfert_date_debut_date_fin_Sous_agent(
+			Sous_agent sous_agent, Reseautransfert reseautransfert, java.util.Date date_debut,
+			java.util.Date date_fin) {
+		// TODO Auto-generated method stub
+Long total = operationRepository.find_all_rapprocher_sum_operation_By_reseau_transfert_date_debut_date_fin_Sous_agent(sous_agent, reseautransfert, date_debut, date_fin);
+		
+		
+		if(total == null) {
+			 
+			return (long) 0;
+		}else {
+			
+			return total;
+		}
+	}
+
+	@Override
+	public Long find_all_rapprocher_sum_aujourdhui_operation_By_Sous_agent(Sous_agent sous_agent,
+			java.util.Date date_debut) {
+		// TODO Auto-generated method stub
+		return  operationRepository.find_all_rapprocher_sum_aujourdhui_operation_By_Sous_agent(sous_agent,date_debut);
+	}
+
+	@Override
+	public Long find_all_sum_operation_By_reseau_transfert_month_Sous_agent(Sous_agent sous_agent,int month) {
+		
+		
+       Long total = operationRepository.find_all_sum_operation_By_reseau_transfert_month_Sous_agent(sous_agent, month);
+		
+		
+		if(total == null) {
+			 
+			return (long) 0;
+		}else {
+			
+			return total;
+		}
+		
+	}
+
+	
+
+
 	
 	
 

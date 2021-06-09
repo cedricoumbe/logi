@@ -52,10 +52,24 @@
                                 <div class="card-body">
                                 
                                     <div class="buttons">
-                                        <a th:href="@{/create_operation/{id}(id=${sous_agent_reseau.getReseautransfertid})}" class="btn btn-outline-primary" th:each="sous_agent_reseau : ${sous_agents.reseautransferts}" th:text="'Nouvelle Operation  ' +${sous_agent_reseau.getReseautransfertnom}" >
+                                        <a th:href="@{/create_operation/{id}(id=${sous_agent_reseau.getReseautransfertid})}" class="btn btn-outline-primary" th:each="sous_agent_reseau : ${sous_agents.reseautransferts}" th:text="'Nouvelle Operation ' +${sous_agent_reseau.getReseautransfertnom}" >
                                          
                                         
                                         </a>
+                                        
+                                        
+                                         <a th:href="@{/create_approvisionnement}" class="btn btn-dark"  >
+                                         
+                                        Approvisionnement
+                                        </a>
+                                        
+                                          
+                                         <a  th:href="@{/create_decaissement}" href="#" class="btn btn-danger"  >
+                                         
+                                            Decaissement
+                                        </a>
+                                     
+                                        
                                      
                                     </div>
                                 </div>
@@ -156,7 +170,7 @@
                                 </thead>
                                 <tbody>
                               
-                                            <tr th:each="liste_operation, iter: ${liste_operations}">
+                                            <tr th:each="liste_operation, iter: ${liste_operations}"   th:classappend = "${liste_operation.operation_rapprocher == 1}?'bg-green'" >
                                               <td th:utext="${iter.count}">No</td>
                                   
                                              <td th:text="${liste_operation.operation_numero_transfert_operateur}"></td>
@@ -167,7 +181,33 @@
                                      
                                          <td th:text="${liste_operation.operation_date_cre}"></td>
                                     
-                                        <th>Action</td>
+                                       <span th:switch="${liste_operation.operation_valider}">
+                                                              
+                       
+                            
+                                                      <td  th:case="0"> 
+                                                      
+                                                      
+                                                     
+                                                             <img width="40%" src="/assets/images/icon-48-deny.png" alt="deny" srcset="">
+                                                           
+                                                    
+                                                      
+                                                          </td> 
+                              
+                                                            <td  th:case="1"> 
+                                                      
+                                                      
+                                                       
+                                                           
+                                                            <img width="40%" src="/assets/images/icon-48-checkin.png" alt="Logo" srcset="">
+                                                           
+                                                         
+                                                      
+                                                          </td> 
+                                                    
+                                                           
+                                                </span>
                                     
                                     </tr>
                                 
@@ -175,8 +215,16 @@
                             </table>
                             <h2 align="center" th:text="${'Total: ' + nombre_operations}"/>
                             
-                              <h2 align="center" th:text="${'Total comission: ' + gain}"/>
+                              <h2 align="center" th:text="${'Total comission: ' + total_somme_comissions}"/>
+                              
+                              
+                                  <h5 align="center" th:text="${'Total rapprocher: ' + nombre_operations_rapprocher}"/>
+                            
+                              <h5 align="center" th:text="${'Total comission rapprocher: ' + total_somme_comissions_rapprocher}"/>
+                              
+                              
                         </div>
+                        
                     </div>
 
                 </section>
@@ -211,7 +259,13 @@
 }
   </style>   
                               
-                            <tr  th:each="liste_rapprochement, iter: ${liste_rapprochements}"  th:classappend = "${liste_rapprochement.rapprochement_probleme == 1}?'bg-green'" >
+                            <tr  th:each="liste_rapprochement, iter: ${liste_rapprochements}"  th:classappend = "${liste_rapprochement.rapprochement_probleme == 0}?'bg-green'" >
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
                                               <td th:utext="${iter.count}">No</td>
                                   
                                              <td th:text="${liste_rapprochement.rapprochement_numero_transfert}"></td>

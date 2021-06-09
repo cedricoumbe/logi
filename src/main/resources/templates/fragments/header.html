@@ -81,32 +81,27 @@
                                 <li class="submenu-item ">
                                      <a th:href="@{/get_rapprochement}">Rapprochement</a>
                                 </li>
+                                  <li class="submenu-item ">
+                                    <a th:href="@{/get_caisse}">Caisse</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/ouvrir_caisse}">Ouverture de caisse</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/fermer_caisse}">Fermeture de caisse</a>
+                                </li>
+                                  <li class="submenu-item ">
+                                    <a th:href="@{/historique_comptable}">Historique Comptable</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="component-breadcrumb.html">Clôture de la journée</a>
+                                </li>
                              
                               
                             </ul>
                         </li>
 	         
-                         <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>CAISSES</span>
-                            </a>
-                            <ul class="submenu ">
-                              <li class="submenu-item ">
-                                    <a th:href="@{/get_caisse}">Caisse</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-alert.html">Ouverture de caisse</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-badge.html">Fermeture de caisse</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-breadcrumb.html">Clôture de la journée</a>
-                                </li>
-                              
-                            </ul>
-                        </li>
+                     
                          <li class="sidebar-item  has-sub">
                                   <a  class='sidebar-link' href="#">
                                 <i class="bi bi-stack"></i>
@@ -120,7 +115,7 @@
                                 </li>
                                 <li class="submenu-item ">
                                    
-                                              <a  th:href="@{/get_user}" class='sidebar-link' href="#">
+                                              <a  th:href="@{/get_journal}" class='sidebar-link' href="#">
                                     Journal Comptable</a>
                                 </li>
                                
@@ -167,7 +162,7 @@
                             </a>
                         </li>
                          <li class="sidebar-item  ">
-                            <a href="table.html" class='sidebar-link'>
+                            <a  th:href="@{/get_all_comission}" class='sidebar-link'>
                                 <i class="bi bi-grid-1x2-fill"></i>
                                 <span>Commissions</span>
                             </a>
